@@ -84,7 +84,7 @@ function Table({ transactions, loading }) {
                   <div className="text-sm font-medium text-gray-900">{transaction.merchant}</div>
                 </td>
                 <td className="px-6 py-4 text-sm text-gray-500">
-                  {transaction.description || '-'}
+                  {transaction.category || '-'}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-right">
                   <span className={`font-semibold ${transaction.amount < 0 ? 'text-red-600' : 'text-green-600'}`}>

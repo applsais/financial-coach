@@ -7,7 +7,7 @@ class TransactionBase(BaseModel):
     merchant: str
     amount: float
     description: Optional[str] = None
-    category: Optional[str] = None
+    category: str
 
 class TransactionCreate(TransactionBase):
     pass

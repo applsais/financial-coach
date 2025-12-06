@@ -84,7 +84,7 @@ async def upload_transactions(
                     date=transaction_date,
                     merchant=str(row['merchant']),
                     amount=float(row['amount']),
-                    description=str(row['description']) if pd.notna(row['description']) else None
+                    category=str(row['category'])
                 )
 
                 db.add(transaction)
@@ -115,12 +115,19 @@ async def upload_transactions(
 async def get_transactions(
     skip: int = 0,
     limit: int = 100,
+    expenses_only: bool = False,
     db: Session = Depends(get_db)
 ):
     """
     Get all transactions with pagination
+    Set expenses_only=true to get only negative amounts (spending)
     """
-    transactions = db.query(Transaction)\
+    query = db.query(Transaction)
+
+    if expenses_only:
+        query = query.filter(Transaction.amount < 0)
+
+    transactions = query\
         .order_by(Transaction.date.desc())\
         .offset(skip)\
         .limit(limit)\
@@ -142,25 +149,30 @@ async def get_transactions(
 @app.get("/api/transactions/summary")
 async def get_transaction_summary(db: Session = Depends(get_db)):
     """
-    Get summary statistics of all transactions
+    Get summary statistics focusing on expenses (negative amounts)
     """
-    transactions = db.query(Transaction).all()
+    all_transactions = db.query(Transaction).all()
+    expenses = [t for t in all_transactions if t.amount < 0]
+    income = [t for t in all_transactions if t.amount >= 0]
 
-    if not transactions:
+    if not expenses:
         return {
             "total_transactions": 0,
-            "total_amount": 0.0,
-            "average_transaction": 0.0,
+            "total_expenses": 0.0,
+            "total_income": sum(t.amount for t in income),
+            "average_expense": 0.0,
             "date_range": None
         }
 
-    total_amount = sum(t.amount for t in transactions)
-    dates = [t.date for t in transactions if t.date]
+    total_expenses = abs(sum(t.amount for t in expenses))
+    total_income = sum(t.amount for t in income)
+    dates = [t.date for t in expenses if t.date]
 
     return {
-        "total_transactions": len(transactions),
-        "total_amount": round(total_amount, 2),
-        "average_transaction": round(total_amount / len(transactions), 2),
+        "total_transactions": len(expenses),
+        "total_expenses": round(total_expenses, 2),
+        "total_income": round(total_income, 2),
+        "average_expense": round(total_expenses / len(expenses), 2),
         "date_range": {
             "start": min(dates).isoformat() if dates else None,
             "end": max(dates).isoformat() if dates else None

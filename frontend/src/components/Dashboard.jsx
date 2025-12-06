@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Table from './Table'
+import Trends from './Trends'
 
 function Dashboard({ uploadResult, onUploadMore }) {
   const [transactions, setTransactions] = useState([])
@@ -15,7 +16,7 @@ function Dashboard({ uploadResult, onUploadMore }) {
   const fetchTransactions = async () => {
     try {
       setLoading(true)
-      const response = await fetch('http://localhost:8000/api/transactions')
+      const response = await fetch('http://localhost:8000/api/transactions?expenses_only=true')
       if (!response.ok) throw new Error('Failed to fetch transactions')
       const data = await response.json()
       setTransactions(data)
@@ -132,92 +133,141 @@ function Dashboard({ uploadResult, onUploadMore }) {
 
         {/* Summary Cards */}
         {summary && summary.total_transactions > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div className="bg-white rounded-xl shadow-lg p-6 border-t-4 border-emerald-500">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div className="bg-white rounded-xl shadow-lg p-6 border-t-4 border-red-500">
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="text-sm text-gray-600 mb-1">Total Transactions</div>
-                  <div className="text-3xl font-bold text-emerald-600">
-                    {summary.total_transactions}
+                  <div className="text-sm text-gray-600 mb-1">Total Expenses</div>
+                  <div className="text-3xl font-bold text-red-600">
+                    {formatCurrency(summary.total_expenses)}
                   </div>
                 </div>
-                <div className="text-4xl">📝</div>
+                <div className="text-4xl">💸</div>
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-lg p-6 border-t-4 border-green-500">
+            <div className="bg-white rounded-xl shadow-lg p-6 border-t-4 border-emerald-500">
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="text-sm text-gray-600 mb-1">Total Spent</div>
-                  <div className="text-3xl font-bold text-green-600">
-                    {formatCurrency(summary.total_amount)}
+                  <div className="text-sm text-gray-600 mb-1">Total Income</div>
+                  <div className="text-3xl font-bold text-emerald-600">
+                    {formatCurrency(summary.total_income)}
                   </div>
                 </div>
                 <div className="text-4xl">💰</div>
               </div>
             </div>
 
-
-            <div className="bg-white rounded-xl shadow-lg p-6 border-t-4 border-lime-500">
+            <div className="bg-white rounded-xl shadow-lg p-6 border-t-4 border-orange-500">
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="text-sm text-gray-600 mb-1">Date Range</div>
-                  <div className="text-sm font-semibold text-gray-800">
-                    {summary.date_range?.start && formatDate(summary.date_range.start)}
-                    <div className="text-xs text-gray-500">to</div>
-                    {summary.date_range?.end && formatDate(summary.date_range.end)}
+                  <div className="text-sm text-gray-600 mb-1">Net Income</div>
+                  <div className="text-3xl font-bold text-orange-600">
+                    {formatCurrency(summary.total_income - summary.total_expenses)}
                   </div>
                 </div>
-                <div className="text-4xl">📅</div>
+                <div className="text-4xl">📊</div>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-xl shadow-lg p-6 border-t-4 border-blue-500">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-sm text-gray-600 mb-1">Expense Transactions</div>
+                  <div className="text-3xl font-bold text-blue-600">
+                    {summary.total_transactions}
+                  </div>
+                </div>
+                <div className="text-4xl">📝</div>
               </div>
             </div>
           </div>
         )}
 
+
+        {/* Trends and Insights Section */}
+        <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Trends Card - 2/3 width */}
+          <div className="lg:col-span-2">
+            <Trends transactions={transactions} />
+          </div>
+
+          {/* Insights Card - 1/3 width */}
+          <div className="bg-white rounded-2xl shadow-xl p-6">
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">AI Insights</h2>
+            <div className="space-y-4">
+              <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                <div className="flex items-start">
+                  <div className="text-2xl mr-3">💡</div>
+                  <div>
+                    <p className="text-sm font-semibold text-blue-800">Top Spending Category</p>
+                    <p className="text-xs text-blue-600 mt-1">Coming soon: AI-powered insights about your spending patterns</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                <div className="flex items-start">
+                  <div className="text-2xl mr-3">📊</div>
+                  <div>
+                    <p className="text-sm font-semibold text-green-800">Spending Trends</p>
+                    <p className="text-xs text-green-600 mt-1">AI will analyze your month-over-month changes</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-orange-50 border-l-4 border-orange-500 p-4 rounded">
+                <div className="flex items-start">
+                  <div className="text-2xl mr-3">⚠️</div>
+                  <div>
+                    <p className="text-sm font-semibold text-orange-800">Unusual Activity</p>
+                    <p className="text-xs text-orange-600 mt-1">Get alerts for unexpected spending spikes</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-purple-50 border-l-4 border-purple-500 p-4 rounded">
+                <div className="flex items-start">
+                  <div className="text-2xl mr-3">🎯</div>
+                  <div>
+                    <p className="text-sm font-semibold text-purple-800">Recommendations</p>
+                    <p className="text-xs text-purple-600 mt-1">Personalized tips to optimize your spending</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-teal-50 border-l-4 border-teal-500 p-4 rounded">
+                <div className="flex items-start">
+                  <div className="text-2xl mr-3">💰</div>
+                  <div>
+                    <p className="text-sm font-semibold text-teal-800">Savings Opportunities</p>
+                    <p className="text-xs text-teal-600 mt-1">Discover ways to reduce expenses</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Transactions Table */}
-        <div className="bg-white rounded-2xl shadow-xl p-8">
-          <div className="flex justify-between items-center mb-6">
+        <div className="bg-white rounded-2xl shadow-xl p-8 mt-12">
+        <div className="flex justify-between items-center mb-6">
             <h2 className="text-2xl font-bold text-gray-800">Recent Transactions</h2>
             <button
-              onClick={fetchTransactions}
-              className="text-green-600 hover:text-green-700 font-medium text-sm flex items-center"
+            onClick={fetchTransactions}
+            className="text-green-600 hover:text-green-700 font-medium text-sm flex items-center"
             >
-              <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-              </svg>
-              Refresh
+            </svg>
+            Refresh
             </button>
-          </div>
-
-          <Table transactions={transactions} loading={loading} />
         </div>
 
-        {/* Quick Stats */}
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center mb-4">
-              <div className="text-3xl mr-3">🎯</div>
-              <h3 className="font-bold text-gray-800">AI Insights</h3>
-            </div>
-            <p className="text-sm text-gray-600">Coming soon: Get personalized spending insights powered by AI</p>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center mb-4">
-              <div className="text-3xl mr-3">📈</div>
-              <h3 className="font-bold text-gray-800">Trends</h3>
-            </div>
-            <p className="text-sm text-gray-600">Coming soon: Visualize your spending patterns over time</p>
-          </div>
-
-          <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex items-center mb-4">
-              <div className="text-3xl mr-3">💡</div>
-              <h3 className="font-bold text-gray-800">Recommendations</h3>
-            </div>
-            <p className="text-sm text-gray-600">Coming soon: Get smart tips to improve your finances</p>
-          </div>
+        <Table transactions={transactions} loading={loading} />
         </div>
+
+
       </div>
     </div>
   )
