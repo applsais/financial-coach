@@ -1,32 +1,27 @@
 import { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { checkDataExists } from './store/transactionsSlice'
 import './App.css'
 import Onboarding from './components/Onboarding'
 import Dashboard from './components/Dashboard'
 
 function App() {
+  const dispatch = useDispatch()
+  const { hasData } = useSelector((state) => state.transactions)
   const [currentScreen, setCurrentScreen] = useState('loading') // 'loading', 'onboarding', or 'dashboard'
   const [uploadResult, setUploadResult] = useState(null)
 
   useEffect(() => {
-    checkExistingData()
-  }, [])
+    // Check if data exists (checks Redux store first, then API if needed)
+    dispatch(checkDataExists())
+  }, [dispatch])
 
-  const checkExistingData = async () => {
-    try {
-      const response = await fetch('http://localhost:8000/api/transactions/exists')
-      const data = await response.json()
-
-      if (data.has_data) {
-        setCurrentScreen('dashboard')
-      } else {
-        setCurrentScreen('onboarding')
-      }
-    } catch (error) {
-      console.error('Error checking for existing data:', error)
-      // Default to onboarding if there's an error
-      setCurrentScreen('onboarding')
+  useEffect(() => {
+    // Update screen based on hasData from Redux
+    if (currentScreen === 'loading') {
+      setCurrentScreen(hasData ? 'dashboard' : 'onboarding')
     }
-  }
+  }, [hasData, currentScreen])
 
   const handleUploadComplete = (result) => {
     setUploadResult(result)
@@ -36,6 +31,10 @@ function App() {
   const handleUploadMore = () => {
     setUploadResult(null)
     setCurrentScreen('onboarding')
+  }
+
+  const handleGoToDashboard = () => {
+    setCurrentScreen('dashboard')
   }
 
   if (currentScreen === 'loading') {
@@ -52,7 +51,7 @@ function App() {
   return (
     <>
       {currentScreen === 'onboarding' ? (
-        <Onboarding onComplete={handleUploadComplete} />
+        <Onboarding onComplete={handleUploadComplete} onGoToDashboard={handleGoToDashboard} />
       ) : (
         <Dashboard uploadResult={uploadResult} onUploadMore={handleUploadMore} />
       )}

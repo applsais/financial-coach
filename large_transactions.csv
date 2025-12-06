@@ -1,0 +1,194 @@
+date,merchant,amount,description,category
+2024-07-01 08:00:00,Paycheck Deposit,3200.00,Monthly salary,Income
+2024-07-03 00:00:00,Netflix,-15.99,Monthly subscription,Entertainment
+2024-07-03 00:00:00,Spotify,-9.99,Music subscription,Entertainment
+2024-07-05 18:03:00,Planet Fitness,-29.99,Gym membership,Health & Fitness
+2024-07-07 00:00:00,Amazon Prime,-14.99,Prime membership,Shopping
+2024-07-08 00:00:00,Adobe Creative Cloud,-52.99,Software subscription,Business
+2024-07-10 00:00:00,Rent Payment,-1450.00,Monthly rent,Housing
+2024-07-12 00:15:00,Electric Company,-142.35,Monthly bill,Utilities
+2024-07-12 00:00:00,Water Utility,-45.67,Monthly bill,Utilities
+2024-07-13 00:00:00,Internet Provider,-79.99,Internet service,Utilities
+2024-07-14 00:00:00,T-Mobile,-85.00,Cell phone plan,Utilities
+2024-07-15 14:01:00,Starbucks,-5.89,Morning coffee,Food & Dining
+2024-07-16 11:10:00,Whole Foods,-87.45,Groceries,Food & Dining
+2024-07-17 18:08:00,Shell Gas Station,-52.30,Fuel,Transportation
+2024-07-18 15:00:00,Target,-89.32,Household items,Shopping
+2024-07-19 12:02:00,Chipotle,-12.85,Lunch,Food & Dining
+2024-07-20 00:00:00,LinkedIn Premium,-29.99,Professional subscription,Business
+2024-07-21 09:02:00,Uber,-18.50,Ride share,Transportation
+2024-07-22 18:00:00,CVS Pharmacy,-34.99,Medications,Healthcare
+2024-07-23 13:00:00,Starbucks,-6.25,Afternoon coffee,Food & Dining
+2024-07-24 15:00:00,Trader Joe's,-64.23,Organic groceries,Food & Dining
+2024-07-25 00:09:00,Apple iCloud,-2.99,Cloud storage,Technology
+2024-07-26 00:06:00,GitHub Pro,-7.00,Developer tools,Business
+2024-07-28 00:00:00,Blue Apron,-59.94,Meal kit subscription,Food & Dining
+2024-07-29 00:00:00,Dollar Shave Club,-9.00,Grooming subscription,Personal Care
+2024-07-30 00:00:00,Audible,-14.95,Audiobook subscription,Entertainment
+2024-08-01 09:14:00,Paycheck Deposit,3200.00,Monthly salary,Income
+2024-08-03 00:04:00,Netflix,-15.99,Monthly subscription,Entertainment
+2024-08-03 00:13:00,Spotify,-9.99,Music subscription,Entertainment
+2024-08-05 05:00:00,Planet Fitness,-29.99,Gym membership,Health & Fitness
+2024-08-07 00:00:00,Amazon Prime,-14.99,Prime membership,Shopping
+2024-08-08 00:00:00,Adobe Creative Cloud,-52.99,Software subscription,Business
+2024-08-10 00:00:00,Rent Payment,-1450.00,Monthly rent,Housing
+2024-08-11 17:09:00,Freelance Project,875.00,Web development,Income
+2024-08-12 00:06:00,Electric Company,-138.21,Monthly bill,Utilities
+2024-08-12 00:10:00,Water Utility,-42.34,Monthly bill,Utilities
+2024-08-13 00:00:00,Internet Provider,-79.99,Internet service,Utilities
+2024-08-14 00:00:00,T-Mobile,-85.00,Cell phone plan,Utilities
+2024-08-15 07:26:00,Starbucks,-5.89,Morning coffee,Food & Dining
+2024-08-16 10:00:00,Whole Foods,-92.15,Groceries,Food & Dining
+2024-08-17 18:00:00,Shell Gas Station,-48.75,Fuel,Transportation
+2024-08-18 16:02:00,Target,-67.89,Household items,Shopping
+2024-08-19 12:26:00,Panera Bread,-13.45,Lunch,Food & Dining
+2024-08-20 00:00:00,LinkedIn Premium,-29.99,Professional subscription,Business
+2024-08-21 21:00:00,Lyft,-22.30,Ride share,Transportation
+2024-08-22 09:00:00,Walgreens,-28.45,Medications,Healthcare
+2024-08-23 15:00:00,Starbucks,-6.50,Afternoon coffee,Food & Dining
+2024-08-24 16:06:00,Trader Joe's,-58.92,Organic groceries,Food & Dining
+2024-08-25 00:00:00,Apple iCloud,-2.99,Cloud storage,Technology
+2024-08-26 00:02:00,GitHub Pro,-7.00,Developer tools,Business
+2024-08-27 19:00:00,Amazon.com,-145.67,Electronics,Shopping
+2024-08-28 00:00:00,Blue Apron,-59.94,Meal kit subscription,Food & Dining
+2024-08-29 00:11:00,Dollar Shave Club,-9.00,Grooming subscription,Personal Care
+2024-08-30 00:07:00,Audible,-14.95,Audiobook subscription,Entertainment
+2024-08-31 14:07:00,Venmo from Mike,100.00,Dinner split refund,Income
+2024-09-01 09:13:00,Paycheck Deposit,3200.00,Monthly salary,Income
+2024-09-03 00:00:00,Netflix,-15.99,Monthly subscription,Entertainment
+2024-09-03 00:00:00,Spotify,-9.99,Music subscription,Entertainment
+2024-09-05 17:00:00,Planet Fitness,-29.99,Gym membership,Health & Fitness
+2024-09-07 00:10:00,Amazon Prime,-14.99,Prime membership,Shopping
+2024-09-08 00:00:00,Adobe Creative Cloud,-52.99,Software subscription,Business
+2024-09-10 00:03:00,Rent Payment,-1450.00,Monthly rent,Housing
+2024-09-12 00:00:00,Electric Company,-155.89,Monthly bill,Utilities
+2024-09-12 00:09:00,Water Utility,-47.23,Monthly bill,Utilities
+2024-09-13 00:04:00,Internet Provider,-79.99,Internet service,Utilities
+2024-09-14 00:00:00,T-Mobile,-85.00,Cell phone plan,Utilities
+2024-09-15 07:00:00,Starbucks,-5.89,Morning coffee,Food & Dining
+2024-09-16 16:00:00,Whole Foods,-101.34,Groceries,Food & Dining
+2024-09-17 07:00:00,Chevron Gas,-55.20,Fuel,Transportation
+2024-09-18 09:00:00,Target,-112.45,Household items,Shopping
+2024-09-19 13:06:00,Subway,-10.99,Lunch,Food & Dining
+2024-09-20 00:00:00,LinkedIn Premium,-29.99,Professional subscription,Business
+2024-09-21 18:15:00,Uber,-19.75,Ride share,Transportation
+2024-09-22 09:00:00,CVS Pharmacy,-41.32,Medications,Healthcare
+2024-09-23 07:17:00,Starbucks,-6.25,Afternoon coffee,Food & Dining
+2024-09-24 10:00:00,Trader Joe's,-71.08,Organic groceries,Food & Dining
+2024-09-25 00:00:00,Apple iCloud,-2.99,Cloud storage,Technology
+2024-09-26 00:06:00,GitHub Pro,-7.00,Developer tools,Business
+2024-09-27 15:02:00,Best Buy,-345.00,New laptop accessories,Electronics
+2024-09-28 00:05:00,Blue Apron,-59.94,Meal kit subscription,Food & Dining
+2024-09-29 00:00:00,Dollar Shave Club,-9.00,Grooming subscription,Personal Care
+2024-09-30 00:13:00,Audible,-14.95,Audiobook subscription,Entertainment
+2024-10-01 09:02:00,Paycheck Deposit,3200.00,Monthly salary,Income
+2024-10-02 08:00:00,Bonus Payment,1500.00,Quarterly bonus,Income
+2024-10-03 00:15:00,Netflix,-15.99,Monthly subscription,Entertainment
+2024-10-03 00:00:00,Spotify,-9.99,Music subscription,Entertainment
+2024-10-05 18:04:00,Planet Fitness,-29.99,Gym membership,Health & Fitness
+2024-10-07 00:08:00,Amazon Prime,-14.99,Prime membership,Shopping
+2024-10-08 00:03:00,Adobe Creative Cloud,-52.99,Software subscription,Business
+2024-10-10 00:08:00,Rent Payment,-1450.00,Monthly rent,Housing
+2024-10-12 00:06:00,Electric Company,-132.45,Monthly bill,Utilities
+2024-10-12 00:00:00,Water Utility,-44.56,Monthly bill,Utilities
+2024-10-13 00:00:00,Internet Provider,-79.99,Internet service,Utilities
+2024-10-14 00:00:00,T-Mobile,-85.00,Cell phone plan,Utilities
+2024-10-15 07:00:00,Starbucks,-5.89,Morning coffee,Food & Dining
+2024-10-16 17:14:00,Whole Foods,-95.67,Groceries,Food & Dining
+2024-10-17 08:12:00,Shell Gas Station,-51.40,Fuel,Transportation
+2024-10-18 15:00:00,Target,-78.23,Household items,Shopping
+2024-10-19 13:05:00,Chipotle,-14.25,Lunch,Food & Dining
+2024-10-20 00:08:00,LinkedIn Premium,-29.99,Professional subscription,Business
+2024-10-21 08:00:00,Uber,-25.60,Ride share,Transportation
+2024-10-22 09:00:00,Walgreens,-32.18,Medications,Healthcare
+2024-10-23 08:30:00,Starbucks,-6.50,Afternoon coffee,Food & Dining
+2024-10-24 17:06:00,Trader Joe's,-63.45,Organic groceries,Food & Dining
+2024-10-25 00:00:00,Apple iCloud,-2.99,Cloud storage,Technology
+2024-10-26 00:00:00,GitHub Pro,-7.00,Developer tools,Business
+2024-10-28 00:00:00,Blue Apron,-59.94,Meal kit subscription,Food & Dining
+2024-10-29 00:00:00,Dollar Shave Club,-9.00,Grooming subscription,Personal Care
+2024-10-30 00:00:00,Audible,-14.95,Audiobook subscription,Entertainment
+2024-10-31 14:05:00,Halloween Costume Store,-67.89,Costume and decorations,Shopping
+2024-11-01 08:00:00,Paycheck Deposit,3200.00,Monthly salary,Income
+2024-11-03 00:00:00,Netflix,-15.99,Monthly subscription,Entertainment
+2024-11-03 00:00:00,Spotify,-9.99,Music subscription,Entertainment
+2024-11-05 19:03:00,Planet Fitness,-29.99,Gym membership,Health & Fitness
+2024-11-07 00:08:00,Amazon Prime,-14.99,Prime membership,Shopping
+2024-11-08 00:15:00,Adobe Creative Cloud,-52.99,Software subscription,Business
+2024-11-10 00:00:00,Rent Payment,-1450.00,Monthly rent,Housing
+2024-11-11 17:06:00,Freelance Project,650.00,Logo design,Income
+2024-11-12 00:00:00,Electric Company,-148.67,Monthly bill,Utilities
+2024-11-12 00:00:00,Water Utility,-46.89,Monthly bill,Utilities
+2024-11-13 00:11:00,Internet Provider,-79.99,Internet service,Utilities
+2024-11-14 00:00:00,T-Mobile,-85.00,Cell phone plan,Utilities
+2024-11-15 13:00:00,Starbucks,-5.89,Morning coffee,Food & Dining
+2024-11-16 10:10:00,Whole Foods,-88.34,Groceries,Food & Dining
+2024-11-17 17:00:00,Chevron Gas,-49.85,Fuel,Transportation
+2024-11-18 15:00:00,Target,-134.56,Household items,Shopping
+2024-11-19 18:00:00,Five Guys,-16.75,Lunch,Food & Dining
+2024-11-20 00:01:00,LinkedIn Premium,-29.99,Professional subscription,Business
+2024-11-21 23:07:00,Lyft,-21.45,Ride share,Transportation
+2024-11-22 15:04:00,CVS Pharmacy,-29.87,Medications,Healthcare
+2024-11-23 08:34:00,Starbucks,-6.25,Afternoon coffee,Food & Dining
+2024-11-24 15:00:00,Trader Joe's,-82.19,Organic groceries,Food & Dining
+2024-11-25 00:00:00,Apple iCloud,-2.99,Cloud storage,Technology
+2024-11-26 00:04:00,GitHub Pro,-7.00,Developer tools,Business
+2024-11-27 19:00:00,Amazon.com,-234.56,Black Friday shopping,Shopping
+2024-11-28 00:14:00,Blue Apron,-59.94,Meal kit subscription,Food & Dining
+2024-11-29 00:00:00,Dollar Shave Club,-9.00,Grooming subscription,Personal Care
+2024-11-30 00:02:00,Audible,-14.95,Audiobook subscription,Entertainment
+2024-12-01 09:15:00,Paycheck Deposit,3200.00,Monthly salary,Income
+2024-12-03 00:10:00,Netflix,-15.99,Monthly subscription,Entertainment
+2024-12-03 00:12:00,Spotify,-9.99,Music subscription,Entertainment
+2024-12-05 19:15:00,Planet Fitness,-29.99,Gym membership,Health & Fitness
+2024-12-07 00:15:00,Amazon Prime,-14.99,Prime membership,Shopping
+2024-12-08 00:00:00,Adobe Creative Cloud,-52.99,Software subscription,Business
+2024-12-10 00:15:00,Rent Payment,-1450.00,Monthly rent,Housing
+2024-12-12 00:00:00,Electric Company,-167.23,Monthly bill,Utilities
+2024-12-12 00:08:00,Water Utility,-48.12,Monthly bill,Utilities
+2024-12-13 00:00:00,Internet Provider,-79.99,Internet service,Utilities
+2024-12-14 00:00:00,T-Mobile,-85.00,Cell phone plan,Utilities
+2024-12-15 08:15:00,Starbucks,-5.89,Morning coffee,Food & Dining
+2024-12-16 17:00:00,Whole Foods,-112.45,Groceries,Food & Dining
+2024-12-17 17:31:00,Shell Gas Station,-53.60,Fuel,Transportation
+2024-12-18 13:00:00,Target,-156.78,Holiday shopping,Shopping
+2024-12-19 12:34:00,Panera Bread,-13.95,Lunch,Food & Dining
+2024-12-20 00:02:00,LinkedIn Premium,-29.99,Professional subscription,Business
+2024-12-21 22:13:00,Uber,-28.30,Ride share,Transportation
+2024-12-22 15:08:00,Walgreens,-36.54,Medications,Healthcare
+2024-12-23 15:14:00,Starbucks,-6.50,Afternoon coffee,Food & Dining
+2024-12-24 10:00:00,Trader Joe's,-94.67,Holiday groceries,Food & Dining
+2024-12-25 00:07:00,Apple iCloud,-2.99,Cloud storage,Technology
+2024-12-26 00:02:00,GitHub Pro,-7.00,Developer tools,Business
+2024-12-27 12:00:00,Best Buy,-456.89,Holiday gifts,Electronics
+2024-12-28 00:13:00,Blue Apron,-59.94,Meal kit subscription,Food & Dining
+2024-12-29 00:00:00,Dollar Shave Club,-9.00,Grooming subscription,Personal Care
+2024-12-30 00:08:00,Audible,-14.95,Audiobook subscription,Entertainment
+2024-12-31 15:11:00,New Years Party Supply,-87.34,Party supplies,Entertainment
+2025-01-01 08:00:00,Paycheck Deposit,3200.00,Monthly salary,Income
+2025-01-03 00:00:00,Netflix,-15.99,Monthly subscription,Entertainment
+2025-01-03 00:00:00,Spotify,-9.99,Music subscription,Entertainment
+2025-01-05 19:08:00,Planet Fitness,-29.99,Gym membership,Health & Fitness
+2025-01-07 00:04:00,Amazon Prime,-14.99,Prime membership,Shopping
+2025-01-08 00:15:00,Adobe Creative Cloud,-52.99,Software subscription,Business
+2025-01-10 00:00:00,Rent Payment,-1450.00,Monthly rent,Housing
+2025-01-12 00:00:00,Electric Company,-178.45,Monthly bill,Utilities
+2025-01-12 00:08:00,Water Utility,-49.23,Monthly bill,Utilities
+2025-01-13 00:00:00,Internet Provider,-79.99,Internet service,Utilities
+2025-01-14 00:00:00,T-Mobile,-85.00,Cell phone plan,Utilities
+2025-01-15 08:24:00,Starbucks,-5.89,Morning coffee,Food & Dining
+2025-01-16 10:00:00,Whole Foods,-97.23,Groceries,Food & Dining
+2025-01-17 18:11:00,Chevron Gas,-52.15,Fuel,Transportation
+2025-01-18 10:13:00,Target,-89.45,Household items,Shopping
+2025-01-19 12:42:00,Chipotle,-15.45,Lunch,Food & Dining
+2025-01-20 00:09:00,LinkedIn Premium,-29.99,Professional subscription,Business
+2025-01-21 18:17:00,Lyft,-24.80,Ride share,Transportation
+2025-01-22 14:00:00,CVS Pharmacy,-33.67,Medications,Healthcare
+2025-01-23 07:00:00,Starbucks,-6.25,Afternoon coffee,Food & Dining
+2025-01-24 17:03:00,Trader Joe's,-76.34,Organic groceries,Food & Dining
+2025-01-25 00:05:00,Apple iCloud,-2.99,Cloud storage,Technology
+2025-01-26 00:00:00,GitHub Pro,-7.00,Developer tools,Business
+2025-01-28 00:00:00,Blue Apron,-59.94,Meal kit subscription,Food & Dining
+2025-01-29 00:00:00,Dollar Shave Club,-9.00,Grooming subscription,Personal Care
+2025-01-30 00:04:00,Audible,-14.95,Audiobook subscription,Entertainment
+2025-01-31 20:09:00,Venmo from Sarah,75.00,Concert ticket split,Income

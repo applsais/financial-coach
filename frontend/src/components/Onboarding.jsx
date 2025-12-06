@@ -1,9 +1,24 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
-function Onboarding({ onComplete }) {
+function Onboarding({ onComplete, onGoToDashboard }) {
   const [file, setFile] = useState(null)
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState(null)
+  const [hasExistingData, setHasExistingData] = useState(false)
+
+  // Check if data already exists
+  useEffect(() => {
+    const checkData = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/api/transactions/exists')
+        const data = await response.json()
+        setHasExistingData(data.has_data)
+      } catch (err) {
+        console.error('Error checking data:', err)
+      }
+    }
+    checkData()
+  }, [])
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0]
@@ -62,6 +77,17 @@ function Onboarding({ onComplete }) {
           <p className="text-xl text-gray-600">
             Upload your transactions and let AI transform your financial data into actionable insights
           </p>
+          {hasExistingData && (
+            <button
+              onClick={onGoToDashboard}
+              className="mt-6 inline-flex items-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors shadow-md"
+            >
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+              Go to Dashboard
+            </button>
+          )}
         </div>
 
         {/* Upload Card */}

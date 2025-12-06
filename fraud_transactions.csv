@@ -1,0 +1,39 @@
+date,merchant,amount,description,category
+2024-07-01 08:00:00,Paycheck Deposit,3200.00,Monthly salary,Income
+2024-07-03 00:00:00,Netflix,-15.99,Monthly subscription,Entertainment
+2024-07-03 00:00:00,Spotify,-9.99,Music subscription,Entertainment
+2024-07-05 13:10:00,Whole Foods,-64.23,Grocery trip,Food & Dining
+2024-07-06 18:32:00,Chipotle,-12.45,Lunch burrito,Food & Dining
+2024-07-07 10:15:00,Trader Joe's,-54.90,Weekly groceries,Food & Dining
+2024-07-08 17:45:00,Shell Gas Station,-42.11,Gas refill,Transportation
+2024-07-09 14:05:00,CVS Pharmacy,-18.29,Medication,Healthcare
+2024-07-10 09:22:00,Amazon,-32.80,Household supplies,Shopping
+2024-08-01 08:00:00,Paycheck Deposit,3200.00,Monthly salary,Income
+2024-08-02 02:44:00,Unknown Electronics Outlet,-899.99,High-value purchase at 2 AM,Electronics
+2024-08-02 02:50:00,Unknown Electronics Outlet,-899.99,Duplicate charge minutes apart,Electronics
+2024-08-03 03:12:00,Tokyo Convenience Store,-37.50,Foreign charge in Japan,Travel
+2024-08-03 03:15:00,Tokyo Convenience Store,-89.00,Foreign ATM withdrawal,Travel
+2024-08-03 03:45:00,Tokyo Electronics Mall,-1299.00,Large foreign purchase,Electronics
+2024-08-03 00:00:00,Netflix,-15.99,Monthly subscription,Entertainment
+2024-08-03 00:00:00,Spotify,-9.99,Music subscription,Entertainment
+2024-08-04 00:00:00,Adobe Creative Cloud,-52.99,Monthly subscription,Business
+2024-08-04 00:03:00,Adobe Creative Cloud,-52.99,Duplicate subscription charge,Business
+2024-08-05 11:04:00,Bank ATM Withdrawal,-200.00,Cash withdrawal,Financial
+2024-08-05 11:06:00,Bank ATM Withdrawal,-200.00,Back-to-back ATM withdrawal,Financial
+2024-08-05 11:09:00,Bank ATM Withdrawal,-200.00,Third suspicious ATM withdrawal,Financial
+2024-08-06 16:20:00,Luxury Jewelry Co.,-7499.00,Expensive jewelry purchase,Shopping
+2024-08-06 16:45:00,Luxury Fashion Boutique,-5200.00,Designer fashion purchase,Shopping
+2024-08-07 06:30:00,Chevron Gas,-41.30,Gas refill,Transportation
+2024-08-07 06:35:00,Chevron Gas,-81.60,Suspicious second charge,Transportation
+2024-08-07 06:37:00,Chevron Gas,-95.00,Large unexplained charge,Transportation
+2024-09-01 08:00:00,Paycheck Deposit,3200.00,Monthly salary,Income
+2024-09-02 02:00:00,FastCash Transfer,-400.00,Money transfer at 2 AM,Financial
+2024-09-02 02:04:00,FastCash Transfer,-400.00,Duplicate nighttime transfer,Financial
+2024-09-03 12:08:00,Panera Bread,-11.80,Lunch,Food & Dining
+2024-09-03 00:00:00,Netflix,-15.99,Monthly subscription,Entertainment
+2024-09-03 00:00:00,Spotify,-9.99,Music subscription,Entertainment
+2024-09-04 00:00:00,Adobe Creative Cloud,-52.99,Monthly subscription,Business
+2024-09-04 15:50:00,Target,-78.44,House essentials,Shopping
+2024-09-05 09:41:00,Starbucks,-6.45,Coffee,Food & Dining
+2024-09-06 03:55:00,Airline Booking,-2280.00,International flight at 4 AM,Travel
+2024-09-07 14:30:00,QuickPay Crypto Exchange,-980.00,Crypto purchase,Financial

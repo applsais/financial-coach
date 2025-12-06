@@ -3,6 +3,7 @@ import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Toolti
 
 function Trends({ transactions }) {
   const [viewType, setViewType] = useState('category') // 'category' or 'date'
+  const [selectedMonth, setSelectedMonth] = useState('all') // 'all' or specific month like '2024-12'
 
   const formatCurrency = (value) => {
     return new Intl.NumberFormat('en-US', {
@@ -11,11 +12,33 @@ function Trends({ transactions }) {
     }).format(Math.abs(value))
   }
 
-  // Optimization to prevent re-render 
+  // Get available months from transactions
+  const availableMonths = useMemo(() => {
+    const months = new Set()
+    transactions.forEach(t => {
+      const date = new Date(t.date)
+      const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`
+      months.add(monthKey)
+    })
+    return Array.from(months).sort().reverse() // Most recent first
+  }, [transactions])
+
+  // Filter transactions by selected month
+  const filteredTransactions = useMemo(() => {
+    if (selectedMonth === 'all') return transactions
+
+    return transactions.filter(t => {
+      const date = new Date(t.date)
+      const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`
+      return monthKey === selectedMonth
+    })
+  }, [transactions, selectedMonth])
+
+  // Optimization to prevent re-render
   const categoryData = useMemo(() => {
     const categoryTotals = {}
-    transactions.forEach(t => {
-      const category = t.category || 'Uncategorized'
+    filteredTransactions.forEach(t => {
+      const category = t.category || 'Miscellaneous'
       const amount = Math.abs(t.amount)
       categoryTotals[category] = (categoryTotals[category] || 0) + amount
     })
@@ -23,11 +46,11 @@ function Trends({ transactions }) {
     return Object.entries(categoryTotals)
       .map(([name, value]) => ({ name, value }))
       .sort((a, b) => b.value - a.value)
-  }, [transactions])
+  }, [filteredTransactions])
 
   const dateData = useMemo(() => {
     const monthlyTotals = {}
-    transactions.forEach(t => {
+    filteredTransactions.forEach(t => {
       const date = new Date(t.date)
       const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`
       const monthName = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short' })
@@ -39,10 +62,18 @@ function Trends({ transactions }) {
     })
 
     return Object.values(monthlyTotals).sort((a, b) => a.key.localeCompare(b.key))
-  }, [transactions])
+  }, [filteredTransactions])
+
+  // Format month for display
+  const formatMonthDisplay = (monthKey) => {
+    if (monthKey === 'all') return 'All Time'
+    const [year, month] = monthKey.split('-')
+    const date = new Date(year, parseInt(month) - 1)
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })
+  }
 
 
-  const COLORS = ['#ef4444', '#f97316', '#f59e0b', '#eab308', '#84cc16', '#22c55e', '#10b981', '#14b8a6', '#06b6d4', '#0ea5e9']
+  const COLORS = ['#ef4444', '#f97316', '#f59e0b', '#8808eaff', '#84cc16', '#0f301bff', '#d5ee11ff', '#14b8a6', '#06b6d4', '#0ea5e9']
 
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
@@ -94,6 +125,31 @@ function Trends({ transactions }) {
         </div>
       </div>
 
+      {/* Month Filter */}
+      <div className="mb-6 flex items-center gap-3">
+        <label className="text-sm font-medium text-gray-700">Filter by Month:</label>
+        <select
+          value={selectedMonth}
+          onChange={(e) => setSelectedMonth(e.target.value)}
+          className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
+        >
+          <option value="all">All Time</option>
+          {availableMonths.map(month => (
+            <option key={month} value={month}>
+              {formatMonthDisplay(month)}
+            </option>
+          ))}
+        </select>
+        {selectedMonth !== 'all' && (
+          <button
+            onClick={() => setSelectedMonth('all')}
+            className="text-sm text-green-600 hover:text-green-700 font-medium"
+          >
+            Clear Filter
+          </button>
+        )}
+      </div>
+
       {/* Category View */}
       {viewType === 'category' && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -107,10 +163,8 @@ function Trends({ transactions }) {
                   cx="50%"
                   cy="50%"
                   labelLine={false}
-                  label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
                   outerRadius={100}
                   fill="#8884d8"
-                  dataKey="value"
                   style={{ fontSize: '10px' }}
                 >
                   {categoryData.map((entry, index) => (

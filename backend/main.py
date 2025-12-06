@@ -1,24 +1,27 @@
 from fastapi import FastAPI, UploadFile, File, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
-from typing import List
+from typing import List, Dict, Any
+from prophet import Prophet
 import pandas as pd
+from ml.forecast import forecast
+from ml.subscriptions import subscriptions
+from ml.anomalies import detect_anomalies
 import io
 from datetime import datetime
+from collections import Counter
+from dateutil.relativedelta import relativedelta
 
 from database import engine, get_db, Base
 from models import Transaction
 from schemas import TransactionResponse, UploadResponse
 
-# Create database tables
 Base.metadata.create_all(bind=engine)
-
 app = FastAPI(title="Financial Coach API")
 
-# Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Vite default port
+    allow_origins=["http://localhost:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -66,20 +69,15 @@ async def upload_transactions(
                 detail=f"Missing required columns: {', '.join(missing_columns)}"
             )
 
-        # Add optional description column if not present
         if 'description' not in df.columns:
             df['description'] = None
 
         transactions_added = 0
         total_amount = 0.0
 
-        # Process each row
         for _, row in df.iterrows():
             try:
-                # Parse date
                 transaction_date = pd.to_datetime(row['date']).date()
-
-                # Create transaction
                 transaction = Transaction(
                     date=transaction_date,
                     merchant=str(row['merchant']),
@@ -92,11 +90,9 @@ async def upload_transactions(
                 total_amount += float(row['amount'])
 
             except Exception as e:
-                # Skip invalid rows and continue
                 print(f"Error processing row: {e}")
                 continue
 
-        # Commit all transactions
         db.commit()
 
         return UploadResponse(
@@ -187,3 +183,46 @@ async def delete_all_transactions(db: Session = Depends(get_db)):
     count = db.query(Transaction).delete()
     db.commit()
     return {"message": f"Deleted {count} transactions"}
+
+
+@app.get("/api/forecast/monthly")
+async def forecast_monthly_expenses(db: Session = Depends(get_db)):
+    """
+    Forecast next month's total expenses and income using Prophet.
+    Returns historical monthly totals + predictions for both.
+    """
+
+    all_transactions = db.query(Transaction).all()
+    expenses = [t for t in all_transactions if t.amount < 0]
+    income_transactions = [t for t in all_transactions if t.amount > 0]  # Changed from >= 0 to > 0
+
+    if not expenses and not income_transactions:
+        raise HTTPException(status_code=400, detail="Not enough data to forecast.")
+
+    return forecast(expenses, income_transactions)
+
+
+@app.get("/api/subscriptions")
+async def get_recurring_expenses(db: Session = Depends(get_db)) -> Dict[str, Any]:
+    """
+    Detect recurring expenses (subscriptions) by finding merchants that:
+    1. Charge once per month (exactly 1 transaction per month)
+    2. Appear in at least 2 different months
+    3. Have consistent amounts (variance < 25%)
+    4. Optionally match known subscription keywords
+    """
+  
+    expenses = db.query(Transaction).filter(Transaction.amount < 0).all()
+
+    return subscriptions(expenses)
+
+@app.get("/api/fraud-detections")
+def detect_fraud(db: Session = Depends(get_db)):
+    expenses = db.query(Transaction).filter(Transaction.amount < 0).all()
+
+    subscription_data = subscriptions(expenses) 
+    subs = subscription_data["subscriptions"]
+
+    suspicious = detect_anomalies(expenses, subs)
+
+    return suspicious.to_dict(orient="records")

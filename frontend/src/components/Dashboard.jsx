@@ -1,41 +1,27 @@
 import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchTransactions, fetchSummary, fetchForecast } from '../store/transactionsSlice'
 import Table from './Table'
 import Trends from './Trends'
+import UnusualModal from './UnusualModal'
+import RecommendationsModal from './RecommendationsModal'
 
 function Dashboard({ uploadResult, onUploadMore }) {
-  const [transactions, setTransactions] = useState([])
-  const [summary, setSummary] = useState(null)
-  const [loading, setLoading] = useState(false)
+  const dispatch = useDispatch()
+  const { transactions, summary, forecast, loading } = useSelector((state) => state.transactions)
   const [showSuccessMessage, setShowSuccessMessage] = useState(true)
+  const [activeModal, setActiveModal] = useState(null)
 
   useEffect(() => {
-    fetchTransactions()
-    fetchSummary()
-  }, [])
+    dispatch(fetchTransactions(true))
+    dispatch(fetchSummary())
+    dispatch(fetchForecast())
+  }, [dispatch])
 
-  const fetchTransactions = async () => {
-    try {
-      setLoading(true)
-      const response = await fetch('http://localhost:8000/api/transactions?expenses_only=true')
-      if (!response.ok) throw new Error('Failed to fetch transactions')
-      const data = await response.json()
-      setTransactions(data)
-    } catch (err) {
-      console.error('Error fetching transactions:', err)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const fetchSummary = async () => {
-    try {
-      const response = await fetch('http://localhost:8000/api/transactions/summary')
-      if (!response.ok) throw new Error('Failed to fetch summary')
-      const data = await response.json()
-      setSummary(data)
-    } catch (err) {
-      console.error('Error fetching summary:', err)
-    }
+  const handleRefresh = () => {
+    dispatch(fetchTransactions(true))
+    dispatch(fetchSummary())
+    dispatch(fetchForecast())
   }
 
   const formatCurrency = (amount) => {
@@ -161,7 +147,7 @@ function Dashboard({ uploadResult, onUploadMore }) {
             <div className="bg-white rounded-xl shadow-lg p-6 border-t-4 border-orange-500">
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="text-sm text-gray-600 mb-1">Net Income</div>
+                  <div className="text-sm text-gray-600 mb-1">Total Net Income</div>
                   <div className="text-3xl font-bold text-orange-600">
                     {formatCurrency(summary.total_income - summary.total_expenses)}
                   </div>
@@ -194,57 +180,89 @@ function Dashboard({ uploadResult, onUploadMore }) {
 
           {/* Insights Card - 1/3 width */}
           <div className="bg-white rounded-2xl shadow-xl p-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">AI Insights</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">Insights</h2>
             <div className="space-y-4">
-              <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
-                <div className="flex items-start">
-                  <div className="text-2xl mr-3">💡</div>
-                  <div>
-                    <p className="text-sm font-semibold text-blue-800">Top Spending Category</p>
-                    <p className="text-xs text-blue-600 mt-1">Coming soon: AI-powered insights about your spending patterns</p>
-                  </div>
-                </div>
-              </div>
+                
+                <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded shadow-sm">
+                    {forecast && forecast.forecast ? (
+                    <div className="text-gray-800 font-medium">
+                        <p className="text-sm font-semi-bold text-gray-900 mb-2">
+                            Next Month Predictions:
+                        </p>
 
-              <div className="bg-green-50 border-l-4 border-green-500 p-4 rounded">
-                <div className="flex items-start">
-                  <div className="text-2xl mr-3">📊</div>
-                  <div>
-                    <p className="text-sm font-semibold text-green-800">Spending Trends</p>
-                    <p className="text-xs text-green-600 mt-1">AI will analyze your month-over-month changes</p>
-                  </div>
-                </div>
-              </div>
+                        <ul className="text-lg text-gray-800 font-medium space-y-1">
+                            <li>
+                                <span className="font-semibold">Predicted Expenses:</span>{" "}
+                                <span className="font-bold text-purple-900">
+                                    {formatCurrency(Math.abs(forecast.forecast.predicted_expenses))}
+                                </span>
+                            </li>
 
-              <div className="bg-orange-50 border-l-4 border-orange-500 p-4 rounded">
-                <div className="flex items-start">
-                  <div className="text-2xl mr-3">⚠️</div>
-                  <div>
-                    <p className="text-sm font-semibold text-orange-800">Unusual Activity</p>
-                    <p className="text-xs text-orange-600 mt-1">Get alerts for unexpected spending spikes</p>
-                  </div>
-                </div>
-              </div>
+                            <li>
+                                <span className="font-semibold">Predicted Income:</span>{" "}
+                                <span className="font-bold text-purple-900">
+                                    {formatCurrency(Math.abs(forecast.forecast.predicted_income))}
+                                </span>
+                            </li>
 
-              <div className="bg-purple-50 border-l-4 border-purple-500 p-4 rounded">
-                <div className="flex items-start">
-                  <div className="text-2xl mr-3">🎯</div>
-                  <div>
-                    <p className="text-sm font-semibold text-purple-800">Recommendations</p>
-                    <p className="text-xs text-purple-600 mt-1">Personalized tips to optimize your spending</p>
-                  </div>
+                            <li>
+                                <span className="font-semibold">Predicted Net Income:</span>{" "}
+                                <span className="font-bold text-purple-900">
+                                    {formatCurrency(
+                                        forecast.forecast.predicted_income -
+                                        forecast.forecast.predicted_expenses
+                                    )}
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    ) : (
+                        <p className="text-gray-500 italic">No forecast available</p>
+                    )}
                 </div>
-              </div>
 
-              <div className="bg-teal-50 border-l-4 border-teal-500 p-4 rounded">
-                <div className="flex items-start">
-                  <div className="text-2xl mr-3">💰</div>
-                  <div>
-                    <p className="text-sm font-semibold text-teal-800">Savings Opportunities</p>
-                    <p className="text-xs text-teal-600 mt-1">Discover ways to reduce expenses</p>
-                  </div>
+                <div className="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                    <div className="flex items-start">
+                    <div>
+                        <p className="text-sm font-semibold text-green-800">Spending Trends</p>
+                        <p className="text-xs text-green-600 mt-1">AI will analyze your month-over-month changes</p>
+                    </div>
+                    </div>
                 </div>
-              </div>
+
+                <div
+                    onClick={() => setActiveModal('unusual')}
+                    className="bg-orange-50 border-l-4 border-orange-500 p-4 rounded cursor-pointer hover:bg-orange-100 transition-colors">
+                    <div className="flex items-start">
+                    <div className="text-2xl mr-3">⚠️</div>
+                    <div>
+                        <p className="text-sm font-semibold text-orange-800">Unusual Activity</p>
+                        <p className="text-xs text-orange-600 mt-1">Click to view spending alerts</p>
+                    </div>
+                    </div>
+                </div>
+
+                <div
+                    onClick={() => setActiveModal('recommendations')}
+                    className="bg-purple-50 border-l-4 border-purple-500 p-4 rounded cursor-pointer hover:bg-purple-100 transition-colors">
+                    <div className="flex items-start">
+                    <div className="text-2xl mr-3">🎯</div>
+                    <div>
+                        <p className="text-sm font-semibold text-purple-800">Recommendations</p>
+                        <p className="text-xs text-purple-600 mt-1">Click for personalized tips and feedback!</p>
+                    </div>
+                    </div>
+                </div>
+
+                <div className="bg-teal-50 border-l-4 border-teal-500 p-4 rounded">
+                    <div className="flex items-start">
+                    <div className="text-2xl mr-3">💰</div>
+                    <div>
+                        <p className="text-sm font-semibold text-teal-800">Savings Opportunities</p>
+                        <p className="text-xs text-teal-600 mt-1">Discover ways to reduce expenses</p>
+                    </div>
+                    </div>
+                </div>
             </div>
           </div>
         </div>
@@ -254,7 +272,7 @@ function Dashboard({ uploadResult, onUploadMore }) {
         <div className="flex justify-between items-center mb-6">
             <h2 className="text-2xl font-bold text-gray-800">Recent Transactions</h2>
             <button
-            onClick={fetchTransactions}
+            onClick={handleRefresh}
             className="text-green-600 hover:text-green-700 font-medium text-sm flex items-center"
             >
             <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -267,6 +285,17 @@ function Dashboard({ uploadResult, onUploadMore }) {
         <Table transactions={transactions} loading={loading} />
         </div>
 
+        {/* Modals */}
+        <UnusualModal
+          isOpen={activeModal === 'unusual'}
+          onClose={() => setActiveModal(null)}
+        />
+
+        <RecommendationsModal
+          isOpen={activeModal === 'recommendations'}
+          onClose={() => setActiveModal(null)}
+          summary={summary}
+        />
 
       </div>
     </div>
