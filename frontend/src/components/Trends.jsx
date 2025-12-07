@@ -95,7 +95,6 @@ function Trends({ transactions }) {
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800">Spending Trends</h2>
 
-        {/* Toggle Buttons */}
         <div className="flex gap-2 bg-gray-100 p-1 rounded-lg">
           <button
             onClick={() => setViewType('category')}
@@ -145,10 +144,10 @@ function Trends({ transactions }) {
         )}
       </div>
 
-      {/* Category View */}
+
       {viewType === 'category' && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Pie Chart */}
+
           <div>
             <h3 className="text-lg font-semibold text-gray-700 mb-4 text-center">Category Distribution</h3>
             <ResponsiveContainer width="100%" height={300}>
@@ -171,7 +170,6 @@ function Trends({ transactions }) {
             </ResponsiveContainer>
           </div>
 
-          {/* Bar Chart */}
           <div>
             <h3 className="text-lg font-semibold text-gray-700 mb-4 text-center">Spending by Category</h3>
             <ResponsiveContainer width="100%" height={300}>
@@ -187,7 +185,7 @@ function Trends({ transactions }) {
         </div>
       )}
 
-      {/* Date View */}
+
       {viewType === 'date' && (
         <div>
           <h3 className="text-lg font-semibold text-gray-700 mb-4 text-center">Monthly Spending</h3>
@@ -204,7 +202,7 @@ function Trends({ transactions }) {
         </div>
       )}
 
-      {/* Summary Stats */}
+
       <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
         {viewType === 'category' && categoryData.slice(0, 4).map((cat, index) => (
           <div key={cat.name} className="bg-gray-50 rounded-lg p-4">
