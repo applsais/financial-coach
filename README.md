@@ -2,6 +2,12 @@
 
 A smart financial coach application that uses AI to transform raw transaction data into personalized insights.
 
+## Submission Materials
+
+- Documentation: https://github.com/applsais/financial-coach/blob/main/documentation.pdf
+- Demo Video: https://youtu.be/gt67DFemMnw
+
+
 ## Getting Started
 
 ### Prerequisites
