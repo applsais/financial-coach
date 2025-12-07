@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import {formatCurrency} from '../../utils'
 
 function UnusualModal({ isOpen, onClose }) {
   const [fraudData, setFraudData] = useState([])
@@ -35,13 +36,6 @@ function UnusualModal({ isOpen, onClose }) {
       day: 'numeric',
       year: 'numeric'
     })
-  }
-
-  const formatAmount = (amount) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD'
-    }).format(Math.abs(amount))
   }
 
   const getSeverityColor = (score) => {
@@ -114,9 +108,6 @@ function UnusualModal({ isOpen, onClose }) {
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Amount
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Severity
-                    </th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
@@ -132,12 +123,7 @@ function UnusualModal({ isOpen, onClose }) {
                         {transaction.category}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-red-600">
-                        {formatAmount(transaction.amount)}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getSeverityColor(transaction.anomaly_score)}`}>
-                          {getSeverityLabel(transaction.anomaly_score)}
-                        </span>
+                        {formatCurrency(transaction.amount)}
                       </td>
                     </tr>
                   ))}

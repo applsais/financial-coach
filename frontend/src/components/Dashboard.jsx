@@ -6,13 +6,13 @@ import Trends from './Trends'
 import UnusualModal from './modals/UnusualModal'
 import RecommendationsModal from './modals/RecommendationsModal'
 import SpendingTrendsModal from './modals/SpendingTrendsModal'
+import ExploreModal from './modals/ExploreModal'
 import { formatCurrency } from '../utils'
 
 function Dashboard({ uploadResult, onUploadMore }) {
   const dispatch = useDispatch()
   
   const { transactions, summary, forecast, loading } = useSelector((state) => state.transactions)
-  const [showSuccessMessage, setShowSuccessMessage] = useState(true)
   const [activeModal, setActiveModal] = useState(null)
 
   useEffect(() => {
@@ -72,35 +72,6 @@ function Dashboard({ uploadResult, onUploadMore }) {
             </button>
           </div>
         </div>
-
-        {/* Success Message */}
-        {uploadResult && showSuccessMessage && (
-          <div className="mb-8 bg-green-50 border-l-4 border-green-500 p-4 rounded-lg">
-            <div className="flex items-start justify-between">
-              <div className="flex">
-                <div className="flex-shrink-0">
-                  <svg className="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <div className="ml-3">
-                  <p className="text-sm text-green-700 font-medium">{uploadResult.message}</p>
-                  <p className="text-sm text-green-600 mt-1">
-                    Total Amount: {formatCurrency(uploadResult.total_amount)}
-                  </p>
-                </div>
-              </div>
-              <button
-                onClick={() => setShowSuccessMessage(false)}
-                className="flex-shrink-0 ml-4 inline-flex text-green-400 hover:text-green-600 focus:outline-none"
-              >
-                <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        )}
 
         {/* Summary Cards */}
         {summary && summary.total_transactions > 0 && (
@@ -197,8 +168,8 @@ function Dashboard({ uploadResult, onUploadMore }) {
                                     <span className="font-semibold">Predicted Net Income:</span>{" "}
                                     <span className="font-bold">
                                         {formatCurrency(
-                                            forecast.forecast.predicted_income -
-                                            forecast.forecast.predicted_expenses
+                                            Math.abs(forecast.forecast.predicted_income) -
+                                            Math.abs(forecast.forecast.predicted_expenses)
                                         )}
                                     </span>
                                 </li>
@@ -251,6 +222,18 @@ function Dashboard({ uploadResult, onUploadMore }) {
                     </div>
                     </div>
                 </div>
+
+                <div
+                    onClick={() => setActiveModal('explore')}
+                    className="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded cursor-pointer hover:bg-indigo-100 transition-colors">
+                    <div className="flex items-start">
+                    <div className="text-2xl mr-3 leading-none">🗺️</div>
+                    <div className="flex-1">
+                        <p className="text-sm font-semibold text-indigo-800 leading-none">Explore Places</p>
+                        <p className="text-xs text-indigo-600 mt-1">Discover affordable dining & grocery options nearby</p>
+                    </div>
+                    </div>
+                </div>
             </div>
           </div>
         </div>
@@ -287,6 +270,11 @@ function Dashboard({ uploadResult, onUploadMore }) {
 
         <SpendingTrendsModal
           isOpen={activeModal === 'trends'}
+          onClose={() => setActiveModal(null)}
+        />
+
+        <ExploreModal
+          isOpen={activeModal === 'explore'}
           onClose={() => setActiveModal(null)}
         />
 
