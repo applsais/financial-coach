@@ -258,7 +258,7 @@ function Dashboard({ uploadResult, onUploadMore }) {
         {/* Transactions Table */}
         <div className="bg-white rounded-2xl shadow-xl p-8 mt-12">
         <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-800">Recent Transactions</h2>
+            <h2 className="text-2xl font-bold text-gray-800">My Transactions</h2>
             <button
             onClick={handleRefresh}
             className="text-green-600 hover:text-green-700 font-medium text-sm flex items-center"
