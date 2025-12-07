@@ -1,24 +1,18 @@
 import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { checkDataExists } from '../store/transactionsSlice'
 
 function Onboarding({ onComplete, onGoToDashboard }) {
   const [file, setFile] = useState(null)
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState(null)
-  const [hasExistingData, setHasExistingData] = useState(false)
+  const dispatch = useDispatch()
+  const hasExistingData = useSelector((state) => state.transactions.hasData)
 
-  // Check if data already exists
+  // Check if data already exists in Redux store
   useEffect(() => {
-    const checkData = async () => {
-      try {
-        const response = await fetch('http://localhost:8000/api/transactions/exists')
-        const data = await response.json()
-        setHasExistingData(data.has_data)
-      } catch (err) {
-        console.error('Error checking data:', err)
-      }
-    }
-    checkData()
-  }, [])
+    dispatch(checkDataExists())
+  }, [dispatch])
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0]
@@ -68,7 +62,7 @@ function Onboarding({ onComplete, onGoToDashboard }) {
   return (
     <div className="min-h-screen w-full  flex items-center justify-center px-4">
       <div className="max-w-2xl w-full">
-        {/* Header */}
+ 
         <div className="text-center mb-12">
           <div className="text-6xl mb-6">💰</div>
           <h1 className="text-5xl font-bold text-gray-900 mb-4">
@@ -76,6 +70,9 @@ function Onboarding({ onComplete, onGoToDashboard }) {
           </h1>
           <p className="text-xl text-gray-600">
             Upload your transactions and let AI transform your financial data into actionable insights
+          </p>
+          <p className="mt-2 text-lg font-semibold text-gray-700">
+            We never store or share your sensitive data.
           </p>
           {hasExistingData && (
             <button

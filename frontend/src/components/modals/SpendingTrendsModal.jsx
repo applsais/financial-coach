@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchTrends } from '../../store/trendsSlice'
+import { formatCurrency } from '../../utils'
 
 function SpendingTrendsModal({ isOpen, onClose }) {
   const dispatch = useDispatch()
@@ -18,12 +19,6 @@ function SpendingTrendsModal({ isOpen, onClose }) {
     return 'text-gray-600'
   }
 
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    }).format(amount)
-  }
 
   if (!isOpen) return null
 
@@ -99,7 +94,6 @@ function SpendingTrendsModal({ isOpen, onClose }) {
                 </div>
               </div>
 
-              {/* Calculated Trends Section */}
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                   All Category Trends
@@ -128,7 +122,6 @@ function SpendingTrendsModal({ isOpen, onClose }) {
                     <tbody className="bg-white divide-y divide-gray-200">
                       {[...calculated_trends]
                         .sort((a, b) => {
-                          // Sort by trend type: increasing first, then decreasing, then stable
                           const trendOrder = { increasing: 0, decreasing: 1, stable: 2 }
                           return trendOrder[a.trend] - trendOrder[b.trend]
                         })
@@ -164,7 +157,6 @@ function SpendingTrendsModal({ isOpen, onClose }) {
                 </div>
               </div>
 
-              {/* Info Footer */}
               <div className="mt-6 bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
                 <p className="text-sm text-blue-800">
                   <strong>Tip:</strong> These budget recommendations are based on your spending patterns and income.

@@ -1,16 +1,11 @@
 import { useState, useMemo } from 'react'
 import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import { formatCurrency } from '../utils'
 
 function Trends({ transactions }) {
-  const [viewType, setViewType] = useState('category') // 'category' or 'date'
-  const [selectedMonth, setSelectedMonth] = useState('all') // 'all' or specific month like '2024-12'
+  const [viewType, setViewType] = useState('category') 
+  const [selectedMonth, setSelectedMonth] = useState('all') 
 
-  const formatCurrency = (value) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    }).format(Math.abs(value))
-  }
 
   // Get available months from transactions
   const availableMonths = useMemo(() => {
@@ -125,7 +120,7 @@ function Trends({ transactions }) {
         </div>
       </div>
 
-      {/* Month Filter */}
+      
       <div className="mb-6 flex items-center gap-3">
         <label className="text-sm font-medium text-gray-700">Filter by Month:</label>
         <select

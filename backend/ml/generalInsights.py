@@ -6,11 +6,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 def generalInsights(all_transactions):
-     # Separate expenses and income
     expenses = [t for t in all_transactions if t.amount < 0]
     income = [t for t in all_transactions if t.amount > 0]
 
-    # Group expenses by category
     category_spending = {}
     for t in expenses:
         category = t.category or "Uncategorized"
@@ -81,7 +79,7 @@ Return ONLY a JSON object with a "feedback" key containing an array of exactly 5
 
         client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo",    # Open Source 
+            model="gpt-3.5-turbo",     
             messages=[
                 {"role": "system", "content": "You are a supportive financial advisor. Return ONLY a valid JSON object with a 'feedback' array containing exactly 5 items. Be encouraging, respectful, and celebrate user's good financial habits while offering gentle suggestions."},
                 {"role": "user", "content": prompt}

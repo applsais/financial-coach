@@ -1,15 +1,9 @@
 import { useState } from 'react'
+import { formatCurrency } from '../utils'
 
 function Table({ transactions, loading }) {
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 10
-
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    }).format(amount)
-  }
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {

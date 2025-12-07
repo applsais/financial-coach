@@ -182,7 +182,7 @@ async def get_transaction_summary(db: Session = Depends(get_db)):
 @app.delete("/api/transactions/all")
 async def delete_all_transactions(db: Session = Depends(get_db)):
     """
-    Delete all transactions (useful for testing)
+    Delete all transactions and end session
     """
     count = db.query(Transaction).delete()
     db.commit()
@@ -209,11 +209,7 @@ async def forecast_monthly_expenses(db: Session = Depends(get_db)):
 @app.get("/api/subscriptions")
 async def get_recurring_expenses(db: Session = Depends(get_db)) -> Dict[str, Any]:
     """
-    Detect recurring expenses (subscriptions) by finding merchants that:
-    1. Charge once per month (exactly 1 transaction per month)
-    2. Appear in at least 2 different months
-    3. Have consistent amounts (variance < 25%)
-    4. Optionally match known subscription keywords
+    Detect recurring expenses (subscriptions)
     """
   
     expenses = db.query(Transaction).filter(Transaction.amount < 0).all()
@@ -247,6 +243,9 @@ async def get_general_feedback(db: Session = Depends(get_db)):
 
 @app.get("/api/general-feedback-trends")
 def detect_fraud(db: Session = Depends(get_db)):
+    """
+    Get AI-powered financial trends feedback based on spending patterns
+    """
     all_transactions = db.query(Transaction).all()
 
     if not all_transactions:

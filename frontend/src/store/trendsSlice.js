@@ -2,13 +2,12 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 const API_URL = 'http://localhost:8000'
 
-// Async thunk for API call with caching check
 export const fetchTrends = createAsyncThunk(
   'trends/fetchTrends',
   async (_, { getState }) => {
     const state = getState()
 
-    // If we already have trends cached, skip the API call
+    //Optimization to minimize OpenAI calls
     if (state.trends.budget_plan.length > 0) {
       return {
         calculated_trends: state.trends.calculated_trends,
@@ -18,7 +17,6 @@ export const fetchTrends = createAsyncThunk(
       }
     }
 
-    // Otherwise, fetch from API
     const response = await fetch(`${API_URL}/api/general-feedback-trends`)
     if (!response.ok) throw new Error('Failed to fetch trends')
     return response.json()
@@ -44,6 +42,7 @@ const trendsSlice = createSlice({
       state.summary = null
     }
   },
+  //Boilerplate
   extraReducers: (builder) => {
     builder
       .addCase(fetchTrends.pending, (state) => {

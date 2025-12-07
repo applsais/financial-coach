@@ -46,6 +46,17 @@ export const checkDataExists = createAsyncThunk(
   }
 )
 
+export const deleteAllTransactions = createAsyncThunk(
+  'transactions/deleteAllTransactions',
+  async () => {
+    const response = await fetch(`${API_URL}/api/transactions/all`, {
+      method: 'DELETE',
+    })
+    if (!response.ok) throw new Error('Failed to delete transactions')
+    return response.json()
+  }
+)
+
 const transactionsSlice = createSlice({
   name: 'transactions',
   initialState: {
@@ -96,6 +107,23 @@ const transactionsSlice = createSlice({
 
       .addCase(checkDataExists.fulfilled, (state, action) => {
         state.hasData = action.payload.has_data
+      })
+
+      // Delete All Transactions
+      .addCase(deleteAllTransactions.pending, (state) => {
+        state.loading = true
+        state.error = null
+      })
+      .addCase(deleteAllTransactions.fulfilled, (state) => {
+        state.loading = false
+        state.transactions = []
+        state.summary = null
+        state.forecast = null
+        state.hasData = false
+      })
+      .addCase(deleteAllTransactions.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.error.message
       })
   },
 })

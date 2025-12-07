@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { fetchTransactions, fetchSummary, fetchForecast } from '../store/transactionsSlice'
+import { fetchTransactions, fetchSummary, fetchForecast, deleteAllTransactions } from '../store/transactionsSlice'
 import Table from './Table'
 import Trends from './Trends'
 import UnusualModal from './modals/UnusualModal'
 import RecommendationsModal from './modals/RecommendationsModal'
 import SpendingTrendsModal from './modals/SpendingTrendsModal'
+import { formatCurrency } from '../utils'
 
 function Dashboard({ uploadResult, onUploadMore }) {
   const dispatch = useDispatch()
+  
   const { transactions, summary, forecast, loading } = useSelector((state) => state.transactions)
   const [showSuccessMessage, setShowSuccessMessage] = useState(true)
   const [activeModal, setActiveModal] = useState(null)
@@ -25,12 +27,6 @@ function Dashboard({ uploadResult, onUploadMore }) {
     dispatch(fetchForecast())
   }
 
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    }).format(amount)
-  }
 
   const handleDeleteAll = async () => {
     if (!window.confirm('Are you sure you want to finish your session?')) {
@@ -38,13 +34,10 @@ function Dashboard({ uploadResult, onUploadMore }) {
     }
 
     try {
-      const response = await fetch('http://localhost:8000/api/transactions/all', {
-        method: 'DELETE',
-      })
-
-      if (response.ok) {
-        onUploadMore()
-      }
+      await dispatch(deleteAllTransactions()).unwrap()
+      // Redirect to home page after deletion
+      const currentUrl = window.location.href;
+      window.location.replace(currentUrl);
     } catch (err) {
       console.error('Error deleting transactions:', err)
       alert('Failed to delete transactions')

@@ -4,10 +4,7 @@ import pandas as pd
 def forecast(expenses, income_transactions):
     result = {"history": [], "forecast": {}}
     monthly_data = {}
-
-    print(f"DEBUG: Received {len(expenses)} expenses and {len(income_transactions)} income transactions")
-
-    # Forecast expenses
+    
     if len(expenses) >= 2:
         expense_df = pd.DataFrame([{
             "date": t.date,
@@ -55,11 +52,11 @@ def forecast(expenses, income_transactions):
 
         prophet_income_df = monthly_income.rename(columns={"month": "ds", "amount": "y"})
         
-        if len(prophet_income_df) >= 2:  # Prophet needs at least 2 data points
+        if len(prophet_income_df) >= 2:  
             income_model = Prophet(yearly_seasonality=False, weekly_seasonality=False, daily_seasonality=False)
             income_model.fit(prophet_income_df)
 
-            future_income = income_model.make_future_dataframe(periods=1, freq="MS")  # Changed from "M"
+            future_income = income_model.make_future_dataframe(periods=1, freq="MS") 
             income_forecast = income_model.predict(future_income)
 
             next_income_pred = income_forecast.tail(1).iloc[0]
