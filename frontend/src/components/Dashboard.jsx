@@ -5,6 +5,7 @@ import Table from './Table'
 import Trends from './Trends'
 import UnusualModal from './modals/UnusualModal'
 import RecommendationsModal from './modals/RecommendationsModal'
+import SpendingTrendsModal from './modals/SpendingTrendsModal'
 
 function Dashboard({ uploadResult, onUploadMore }) {
   const dispatch = useDispatch()
@@ -213,19 +214,23 @@ function Dashboard({ uploadResult, onUploadMore }) {
                         ) : (
                             <>
                             <p className="text-sm font-semibold text-blue-800 leading-none">Next Month Predictions</p>
-                            <p className="text-xs text-blue-600 mt-1 italic">No forecast available</p>
+                            <div className="flex justify-center items-center py-12">
+                                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                            </div>
                             </>
                         )}
                     </div>
                     </div>
                 </div>
 
-                <div className="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                <div
+                    onClick={() => setActiveModal('trends')}
+                    className="bg-green-50 border-l-4 border-green-500 p-4 rounded cursor-pointer hover:bg-green-100 transition-colors">
                     <div className="flex items-start">
                     <div className="text-2xl mr-3 leading-none">📈</div>
                     <div className="flex-1">
                         <p className="text-sm font-semibold text-green-800 leading-none">Spending Trends</p>
-                        <p className="text-xs text-green-600 mt-1">AI will analyze your month-over-month changes</p>
+                        <p className="text-xs text-green-600 mt-1">Click to view budget recommendations & trends</p>
                     </div>
                     </div>
                 </div>
@@ -250,16 +255,6 @@ function Dashboard({ uploadResult, onUploadMore }) {
                     <div className="flex-1">
                         <p className="text-sm font-semibold text-purple-800 leading-none">Recommendations</p>
                         <p className="text-xs text-purple-600 mt-1">Click for personalized tips and feedback!</p>
-                    </div>
-                    </div>
-                </div>
-
-                <div className="bg-teal-50 border-l-4 border-teal-500 p-4 rounded">
-                    <div className="flex items-start">
-                    <div className="text-2xl mr-3 leading-none">💰</div>
-                    <div className="flex-1">
-                        <p className="text-sm font-semibold text-teal-800 leading-none">Savings Opportunities</p>
-                        <p className="text-xs text-teal-600 mt-1">Discover ways to reduce expenses</p>
                     </div>
                     </div>
                 </div>
@@ -295,6 +290,11 @@ function Dashboard({ uploadResult, onUploadMore }) {
           isOpen={activeModal === 'recommendations'}
           onClose={() => setActiveModal(null)}
           summary={summary}
+        />
+
+        <SpendingTrendsModal
+          isOpen={activeModal === 'trends'}
+          onClose={() => setActiveModal(null)}
         />
 
       </div>

@@ -8,6 +8,7 @@ from ml.forecast import forecast
 from ml.subscriptions import subscriptions
 from ml.anomalies import detect_anomalies
 from ml.generalInsights import generalInsights
+from ml.trends import trends
 import io
 from dateutil.relativedelta import relativedelta
 from dotenv import load_dotenv
@@ -246,11 +247,9 @@ async def get_general_feedback(db: Session = Depends(get_db)):
 
 @app.get("/api/general-feedback-trends")
 def detect_fraud(db: Session = Depends(get_db)):
-    expenses = db.query(Transaction).filter(Transaction.amount < 0).all()
+    all_transactions = db.query(Transaction).all()
 
-    subscription_data = subscriptions(expenses) 
-    subs = subscription_data["subscriptions"]
-
-    suspicious = detect_anomalies(expenses, subs)
-
-    return suspicious.to_dict(orient="records")
+    if not all_transactions:
+        raise HTTPException(status_code=400, detail="No transaction data available")
+    
+    return trends(all_transactions)
