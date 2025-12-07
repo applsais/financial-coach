@@ -72,7 +72,7 @@ function Onboarding({ onComplete, onGoToDashboard }) {
             Upload your transactions and let AI transform your financial data into actionable insights
           </p>
           <p className="mt-2 text-lg font-semibold text-gray-700">
-            We never store or share your sensitive data.
+            We don't share your sensitive data or permanently store it.
           </p>
           {hasExistingData && (
             <button

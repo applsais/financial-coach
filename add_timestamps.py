@@ -2,7 +2,6 @@ import csv
 import random
 from datetime import datetime, time
 
-# Define realistic time ranges for different merchant types
 MERCHANT_TIMES = {
     'Paycheck Deposit': [(9, 0)],  # 9 AM
     'Netflix': [(0, 0)],  # Midnight (subscription)
@@ -46,11 +45,9 @@ MERCHANT_TIMES = {
 
 def get_time_for_merchant(merchant):
     """Get a realistic time for a merchant"""
-    # Check if merchant name starts with any key
     for key, times in MERCHANT_TIMES.items():
         if merchant.startswith(key):
             hour, minute = random.choice(times)
-            # Add some randomness (±15 minutes)
             minute += random.randint(-15, 15)
             if minute < 0:
                 minute = 0
@@ -60,12 +57,10 @@ def get_time_for_merchant(merchant):
                 hour = min(23, hour + 1)
             return f"{hour:02d}:{minute:02d}:00"
 
-    # Default times for unknown merchants
     default_times = [(10, 0), (12, 0), (14, 0), (16, 0), (19, 0)]
     hour, minute = random.choice(default_times)
     return f"{hour:02d}:{minute:02d}:00"
 
-# Read the CSV
 with open('large_transactions.csv', 'r') as infile:
     reader = csv.DictReader(infile)
     rows = list(reader)
@@ -77,12 +72,10 @@ for row in rows:
     date_str = row['date']  # e.g., "2024-07-01"
     time_str = get_time_for_merchant(merchant)
 
-    # Combine date and time
     datetime_str = f"{date_str} {time_str}"
     row['date'] = datetime_str
     updated_rows.append(row)
 
-# Write back to CSV
 with open('large_transactions.csv', 'w', newline='') as outfile:
     fieldnames = ['date', 'merchant', 'amount', 'description', 'category']
     writer = csv.DictWriter(outfile, fieldnames=fieldnames)

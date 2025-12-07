@@ -1,0 +1,69 @@
+date,merchant,amount,description,category
+2025-09-01 09:00:00,Paycheck Deposit,2500.00,Monthly salary,income
+2025-09-02 08:12:43,Starbucks #4432,-5.99,Morning coffee,restaurants
+2025-09-03 13:44:12,McDonald's,-8.75,Lunch meal,fast_food
+2025-09-04 18:21:55,Kroger,-82.41,Weekly groceries,grocery
+2025-09-05 10:14:30,Walgreens,-22.78,Cold medicine,health
+2025-09-06 16:32:11,Target,-129.44,Household items,general
+2025-09-07 08:53:49,Planet Fitness,-29.99,Gym membership,gym
+2025-09-08 12:47:04,Chipotle,-12.99,Burrito bowl,restaurants
+2025-09-09 19:04:25,Walmart,-55.68,General shopping,general
+2025-09-10 07:33:18,7-Eleven,-6.84,Energy drink,convenience
+2025-09-11 20:45:50,Trader Joe's,-64.19,Grocery stock-up,grocery
+2025-09-12 09:18:05,Subway,-9.55,Breakfast sandwich,fast_food
+2025-09-13 14:11:22,CVS,-17.25,Health items,health
+2025-09-14 11:32:09,Chick-fil-A,-11.22,Lunch combo,fast_food
+2025-09-15 15:10:47,Freelance Payment,600.00,Web project,income
+2025-09-16 02:55:33,CRYPTO-AUTO-PAY,-544.00,Unauthorized crypto debit,general
+2025-09-17 03:21:50,UBER-UK,-114.59,Ride in London,convenience
+2025-10-01 09:00:00,Paycheck Deposit,2500.00,Monthly salary,income
+2025-10-02 08:30:42,Whole Foods,-92.44,Groceries,grocery
+2025-10-03 12:14:33,Panda Express,-13.87,Lunch special,fast_food
+2025-10-04 17:44:21,LA Fitness,-39.99,Membership renewal,gym
+2025-10-05 11:09:12,Walgreens,-19.33,Vitamins,health
+2025-10-06 19:32:01,Apple Store,-1299.00,New MacBook,general
+2025-10-07 07:51:18,7-Eleven,-7.21,Snacks,convenience
+2025-10-08 18:55:44,Olive Garden,-31.40,Dinner outing,restaurants
+2025-10-09 13:34:29,Walmart,-88.55,General goods,general
+2025-10-10 10:12:17,Subway,-10.89,Lunch,fast_food
+2025-10-11 20:28:59,Trader Joe's,-69.33,Grocery refill,grocery
+2025-10-12 17:02:44,Chipotle,-13.21,Burrito bowl,restaurants
+2025-10-13 09:44:26,CVS,-12.55,Pain reliever,health
+2025-10-14 14:55:11,Target,-104.88,House supplies,general
+2025-10-15 16:13:20,Freelance Payment,550.00,UI design work,income
+2025-10-16 04:13:39,EURO-ELECTRONICS,-432.76,Suspicious foreign charge,general
+2025-10-17 02:48:22,RIDESHARE-RU,-88.25,Ride in Moscow,convenience
+2025-11-01 09:00:00,Paycheck Deposit,2500.00,Monthly salary,income
+2025-11-02 08:27:14,Starbucks #4432,-6.45,Coffee + snack,restaurants
+2025-11-03 12:55:41,McDonald's,-8.99,Lunch combo,fast_food
+2025-11-04 19:13:12,Kroger,-83.22,Grocery shopping,grocery
+2025-11-05 10:49:55,Trader Joe's,-61.18,Weekly foods,grocery
+2025-11-06 11:12:33,Planet Fitness,-29.99,Membership fee,gym
+2025-11-07 16:20:48,Chipotle,-12.48,Lunch,restaurants
+2025-11-08 14:33:29,Target,-118.55,General shopping,general
+2025-11-09 09:22:16,Walgreens,-17.44,Flu medicine,health
+2025-11-10 20:04:51,Whole Foods,-94.75,Groceries,grocery
+2025-11-11 07:55:38,7-Eleven,-5.99,Snacks,convenience
+2025-11-12 18:33:47,Olive Garden,-28.61,Dinner with friend,restaurants
+2025-11-13 13:09:12,Subway,-11.55,Afternoon sandwich,fast_food
+2025-11-14 16:45:55,Walmart,-72.88,Household goods,general
+2025-11-15 15:12:44,Freelance Payment,700.00,Logo design,income
+2025-11-16 02:44:09,CRYPTO-MINER.IO,-689.00,Unauthorized crypto mining fee,general
+2025-11-17 03:55:27,EU-TAXI,-122.48,Taxi in Paris,convenience
+2025-12-01 09:00:00,Paycheck Deposit,2500.00,Monthly salary,income
+2025-12-02 10:33:41,Kroger,-84.77,Grocery haul,grocery
+2025-12-03 18:11:03,Chick-fil-A,-10.33,Dinner combo,fast_food
+2025-12-04 11:20:29,Walgreens,-21.66,Health products,health
+2025-12-05 07:42:11,Starbucks #4432,-6.12,Breakfast coffee,restaurants
+2025-12-06 16:09:34,Target,-142.22,Holiday shopping,general
+2025-12-07 19:22:18,Domino's Pizza,-17.40,Pizza night,restaurants
+2025-12-08 12:13:27,Planet Fitness,-29.99,Gym membership,gym
+2025-12-09 09:28:55,Trader Joe's,-74.63,Pre-holiday groceries,grocery
+2025-12-10 14:32:14,Subway,-12.33,Lunch sandwich,fast_food
+2025-12-11 20:10:58,Whole Foods,-97.55,Groceries,grocery
+2025-12-12 11:41:09,CVS,-16.44,Pharmacy items,health
+2025-12-13 17:24:07,Chipotle,-12.88,Dinner bowl,restaurants
+2025-12-14 13:52:55,Walmart,-81.11,General shopping,general
+2025-12-15 16:08:01,Freelance Payment,650.00,Frontend project,income
+2025-12-16 03:11:44,INTL-MARKET-TOKYO,-455.88,Overseas electronics purchase,general
+2025-12-17 04:55:22,UBERPAY-CA,-109.33,Rides in Canada,convenience

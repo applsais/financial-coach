@@ -120,7 +120,6 @@ async def get_transactions(
 ):
     """
     Get all transactions with pagination
-    Set expenses_only=true to get only negative amounts (spending)
     """
     query = db.query(Transaction)
 

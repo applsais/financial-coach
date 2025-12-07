@@ -163,7 +163,7 @@ def detect_anomalies(transactions, subscriptions=None):
     rule_results = apply_rules(df)
     df["rule_anomaly"] = rule_results["rule_anomaly"]
     df = df.sort_values("anomaly_score")
-    ml_anomalies = df["anomaly_score"] < df["anomaly_score"].quantile(0.05)
+    ml_anomalies = df["anomaly_score"] < df["anomaly_score"].quantile(0.10)
 
     # Only flag anomalies if:
     # - Business rule flagged it (high priority)
