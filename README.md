@@ -1,8 +1,11 @@
 # Financial Coach
 
 A smart financial coach application that uses AI to transform raw transaction data into personalized insights.
-Documentation is documentation.pdf
-Demo Video: https://youtu.be/gt67DFemMnw
+
+## Submission Materials
+
+- Documentation is documentation.pdf
+- Demo Video: https://youtu.be/gt67DFemMnw
 
 
 ## Getting Started
