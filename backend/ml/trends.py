@@ -196,7 +196,7 @@ Return ONLY a JSON object with a "budget_plan" key containing an array of exactl
 
         client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         response = client.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": "You are a financial budgeting advisor. Return ONLY a valid JSON object with a 'budget_plan' array containing exactly 5 budget recommendations."},
                 {"role": "user", "content": prompt}
