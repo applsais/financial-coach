@@ -87,7 +87,6 @@ function Onboarding({ onComplete, onGoToDashboard }) {
           )}
         </div>
 
-        {/* Upload Card */}
         <div className="bg-white rounded-2xl shadow-2xl p-8">
           <h2 className="text-2xl font-bold text-gray-800 mb-6">Get Started</h2>
 
@@ -142,7 +141,6 @@ function Onboarding({ onComplete, onGoToDashboard }) {
             </button>
           )}
 
-          {/* Error Message */}
           {error && (
             <div className="mt-6 bg-red-50 border-l-4 border-red-500 p-4 rounded">
               <div className="flex">
@@ -158,7 +156,6 @@ function Onboarding({ onComplete, onGoToDashboard }) {
             </div>
           )}
 
-          {/* CSV Format Info */}
           <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
             <h3 className="text-sm font-semibold text-blue-800 mb-2">CSV Format Requirements:</h3>
             <p className="text-sm text-blue-700">
@@ -173,7 +170,6 @@ function Onboarding({ onComplete, onGoToDashboard }) {
           </div>
         </div>
 
-        {/* Features Preview */}
         <div className="mt-12 grid grid-cols-3 gap-6 text-center">
           <div>
             <div className="text-3xl mb-2">🤖</div>
