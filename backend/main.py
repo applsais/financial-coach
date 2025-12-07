@@ -7,10 +7,13 @@ import pandas as pd
 from ml.forecast import forecast
 from ml.subscriptions import subscriptions
 from ml.anomalies import detect_anomalies
+from ml.generalInsights import generalInsights
 import io
-from datetime import datetime
-from collections import Counter
 from dateutil.relativedelta import relativedelta
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 from database import engine, get_db, Base
 from models import Transaction
@@ -217,6 +220,31 @@ async def get_recurring_expenses(db: Session = Depends(get_db)) -> Dict[str, Any
     return subscriptions(expenses)
 
 @app.get("/api/fraud-detections")
+def detect_fraud(db: Session = Depends(get_db)):
+    expenses = db.query(Transaction).filter(Transaction.amount < 0).all()
+
+    subscription_data = subscriptions(expenses) 
+    subs = subscription_data["subscriptions"]
+
+    suspicious = detect_anomalies(expenses, subs)
+
+    return suspicious.to_dict(orient="records")
+
+@app.get("/api/general-feedback")
+async def get_general_feedback(db: Session = Depends(get_db)):
+    """
+    Get AI-powered financial feedback based on spending patterns
+    """
+
+    all_transactions = db.query(Transaction).all()
+
+    if not all_transactions:
+        raise HTTPException(status_code=400, detail="No transaction data available")
+    
+    return generalInsights(all_transactions)
+
+
+@app.get("/api/general-feedback-trends")
 def detect_fraud(db: Session = Depends(get_db)):
     expenses = db.query(Transaction).filter(Transaction.amount < 0).all()
 
