@@ -206,7 +206,7 @@ function Dashboard({ uploadResult, onUploadMore }) {
                     <div className="text-2xl mr-3 leading-none">⚠️</div>
                     <div className="flex-1">
                         <p className="text-sm font-semibold text-orange-800 leading-none">Unusual Activity</p>
-                        <p className="text-xs text-orange-600 mt-1">Click to view spending alerts</p>
+                        <p className="text-xs text-orange-600 mt-1">Click to view suspicious activity</p>
                     </div>
                     </div>
                 </div>

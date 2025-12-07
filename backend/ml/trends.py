@@ -149,7 +149,6 @@ def trends(all_transactions):
     for source, amount in income_sources.items():
         income_summary.append(f"- {source}: ${amount:.2f}")
 
-    # Format calculated trends for the prompt
     trends_summary = []
     for trend in calculated_trends:
         trend_desc = f"{trend['category']}: {trend['trend']}"
@@ -197,7 +196,7 @@ Return ONLY a JSON object with a "budget_plan" key containing an array of exactl
 
         client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4o",
             messages=[
                 {"role": "system", "content": "You are a financial budgeting advisor. Return ONLY a valid JSON object with a 'budget_plan' array containing exactly 5 budget recommendations."},
                 {"role": "user", "content": prompt}

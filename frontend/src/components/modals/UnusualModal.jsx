@@ -38,18 +38,6 @@ function UnusualModal({ isOpen, onClose }) {
     })
   }
 
-  const getSeverityColor = (score) => {
-    const absScore = Math.abs(score)
-    if (absScore > 0.4) return 'text-red-600 bg-red-50'
-    if (absScore > 0.3) return 'text-orange-600 bg-orange-50'
-    return 'text-yellow-600 bg-yellow-50'
-  }
-
-  const getSeverityLabel = (score) => {
-    const absScore = Math.abs(score)
-    if (absScore > 0.4) return 'Severe'
-    return 'Mild'
-  }
 
   if (!isOpen) return null
 

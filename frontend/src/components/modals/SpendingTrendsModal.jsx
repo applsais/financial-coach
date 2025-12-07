@@ -121,6 +121,7 @@ function SpendingTrendsModal({ isOpen, onClose }) {
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
                       {[...calculated_trends]
+                        .filter((trend) => trend.category !== 'Income' && trend.category !== 'Total Expenses')
                         .sort((a, b) => {
                           const trendOrder = { increasing: 0, decreasing: 1, stable: 2 }
                           return trendOrder[a.trend] - trendOrder[b.trend]

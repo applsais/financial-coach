@@ -167,7 +167,7 @@ def detect_anomalies(transactions, subscriptions=None):
 
     # Only flag anomalies if:
     # - Business rule flagged it (high priority)
-    # - OR (ML flagged it AND it's not a known service)
+    # - OR Model flagged 
     suspicious = df[
         (
             (df["rule_anomaly"] == True) |

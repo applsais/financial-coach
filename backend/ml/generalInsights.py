@@ -79,7 +79,7 @@ Return ONLY a JSON object with a "feedback" key containing an array of exactly 5
 
         client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo",     
+            model="gpt-4o",     
             messages=[
                 {"role": "system", "content": "You are a supportive financial advisor. Return ONLY a valid JSON object with a 'feedback' array containing exactly 5 items. Be encouraging, respectful, and celebrate user's good financial habits while offering gentle suggestions."},
                 {"role": "user", "content": prompt}
